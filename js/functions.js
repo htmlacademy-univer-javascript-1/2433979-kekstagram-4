@@ -5,5 +5,6 @@ const checkStringLength = (string, maxLength) => string.length <= maxLength;
 const isPalindrome = (string) => {
   const normalizedString = string.replaceAll().toLowerCase();
   const reverseString = normalizedString.split().reverse().join();
-  return (normalizedString === reverseString);
+  return normalizedString === reverseString;
 };
+
