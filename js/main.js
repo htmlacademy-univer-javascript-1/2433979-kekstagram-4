@@ -28,7 +28,14 @@ const NAMES = [
   'Катя',
   'Илья'
 ];
-
+const DESCRIPTIONS = [
+  'Как дела дорогие подписчики?',
+  'Всем хорошего дня!',
+  'Я на пляже в Дубае',
+  'Ставь лайк если любишь маму',
+  'Как у вас дела?',
+  'Сегодня отличная погода',
+];
 //функция для получения случайного числа из диапазона
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
@@ -59,7 +66,6 @@ const getRndIntWithoutRepeat = (min, max) => {
 const getRandomArrayElement = (elements) => (
   (elements[getRandomInteger(0, elements.length - 1)])
 );
-const descriptions = ['Как дела дорогие подписчики?', 'Всем хорошего дня!', 'Я на пляже в Дубае'];
 
 //формирует текст комментария посредством взятия одного или двух случайных предложений из представленных в messages
 const createMessage = () => {
@@ -81,13 +87,10 @@ const urlObject = getRndIntWithoutRepeat(1, SIMILAR_OBJECT_COUNT);
 const createObject = () => ({
   id: idObject(),
   url: `photos/${urlObject()}.jpg`,
-  description: getRandomArrayElement(descriptions),
+  description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: Array.from({length: getRandomInteger(0,30)}, createComment)
 });
 
-
 const similarObjects = Array.from({length: SIMILAR_OBJECT_COUNT}, createObject);
-
-console.log(similarObjects);
 
