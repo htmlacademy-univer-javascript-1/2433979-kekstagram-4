@@ -7,4 +7,3 @@ const isPalindrome = (string) => {
   const reverseString = normalizedString.split('').reverse().join('');
   return normalizedString === reverseString;
 };
-
