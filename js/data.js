@@ -41,7 +41,9 @@ const DESCRIPTIONS = [
 //формирует текст комментария посредством взятия одного или двух случайных предложений из представленных в messages
 const createMessage = () => {
   const indexMessage = getRndIntWithoutRepeat(0, MESSAGES.length - 1);
-  return getRandomInteger(MESSAGE_MIN_COUNT,MESSAGE_MAX_COUNT) === 1 ? MESSAGES[indexMessage()] : MESSAGES[indexMessage()] + ' ' + MESSAGES[indexMessage()]
+  const commentOneMessage = MESSAGES[indexMessage()];
+  const commentTwoMessages = `${MESSAGES[indexMessage()]} ${MESSAGES[indexMessage()]}`;
+  return getRandomInteger(MESSAGE_MIN_COUNT,MESSAGE_MAX_COUNT) === 1 ? commentOneMessage : commentTwoMessages;
 };
 
 const idComment = getRndIntWithoutRepeat(COMMENT_MIN_COUNT, COMMENT_MAX_COUNT);
