@@ -9,6 +9,7 @@ const COMMENT_MIN_COUNT = 0;
 const COMMENT_MAX_COUNT = 30;
 const MESSAGE_MIN_COUNT = 1;
 const MESSAGE_MAX_COUNT = 2;
+
 const MESSAGES = [
   'Всё отлично', 'В целом всё неплохо.', 'Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
@@ -18,6 +19,7 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают.',
   'Как можно было поймать такой неудачный момент?!'
 ];
+
 const NAMES = [
   'Алена',
   'Максим',
@@ -30,6 +32,7 @@ const NAMES = [
   'Катя',
   'Илья'
 ];
+
 const DESCRIPTIONS = [
   'Как дела дорогие подписчики?',
   'Всем хорошего дня!',
@@ -38,6 +41,7 @@ const DESCRIPTIONS = [
   'Как у вас дела?',
   'Сегодня отличная погода',
 ];
+
 //формирует текст комментария посредством взятия одного или двух случайных предложений из представленных в messages
 const createMessage = () => {
   const indexMessage = getRndIntWithoutRepeat(0, MESSAGES.length - 1);
@@ -47,6 +51,7 @@ const createMessage = () => {
 };
 
 const idComment = getRndIntWithoutRepeat(COMMENT_MIN_COUNT, COMMENT_MAX_COUNT);
+
 //создает комментарий
 const createComment = () => ({
   id: idComment(),
@@ -56,7 +61,9 @@ const createComment = () => ({
 });
 
 const idObject = getRndIntWithoutRepeat(1, SIMILAR_OBJECT_COUNT);
+
 const urlObject = getRndIntWithoutRepeat(1, SIMILAR_OBJECT_COUNT);
+
 const createObject = () => ({
   id: idObject(),
   url: `photos/${urlObject()}.jpg`,
