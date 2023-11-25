@@ -1,3 +1,4 @@
 import {similarObjects} from './data.js';
-similarObjects();
+import {renderThumbnails} from './miniature.js';
 
+renderThumbnails(similarObjects());
