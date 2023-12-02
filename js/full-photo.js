@@ -69,3 +69,5 @@ const showFullPicture = (data) => {
   createFullPhoto(data);
   renderComments(data.comments);
 };
+
+export { showFullPicture };
