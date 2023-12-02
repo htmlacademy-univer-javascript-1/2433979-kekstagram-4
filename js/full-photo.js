@@ -9,8 +9,8 @@ const countComments = fullPicture.querySelector('.social__comment-count');
 
 const createFullPhoto = ({url, description, likes}) => {
 
-  fullPicture.querySelector('.big-picture__img').src = url;
-  fullPicture.querySelector('.picture__img').alt = description;
+  fullPicture.querySelector('.big-picture__img').querySelector('img').src = url;
+  fullPicture.querySelector('.big-picture__img').querySelector('img').alt = description;
   fullPicture.querySelector('.likes-count').textContent = likes;
   fullPicture.querySelector('.social__caption').textContent = description;
 };
