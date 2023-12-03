@@ -1,3 +1,4 @@
+import { showFullPhoto } from './full-photo.js';
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
@@ -16,6 +17,10 @@ const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
     const thumbnail = createThumbnail(picture);
+    thumbnail.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      showFullPhoto(picture);
+    });
     fragment.append(thumbnail);
   });
 
