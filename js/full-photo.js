@@ -53,6 +53,9 @@ const hideFullPhoto = () => {
   fullPhoto.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeyDown);
+  loaderCommentsButton.removeEventListener('click', loadComments);
+  commentsShow = 0;
+  allComments = [];
 };
 
 //используем функциональное выражение, а не стрелочное, т.к. при записи функции в
