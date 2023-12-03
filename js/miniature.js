@@ -1,4 +1,4 @@
-import { showFullPicture } from './full-photo.js';
+import { showFullPhoto } from './full-photo.js';
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
@@ -19,7 +19,7 @@ const renderThumbnails = (pictures) => {
     const thumbnail = createThumbnail(picture);
     thumbnail.addEventListener('click', (evt) => {
       evt.preventDefault();
-      showFullPicture(picture);
+      showFullPhoto(picture);
     });
     fragment.append(thumbnail);
   });

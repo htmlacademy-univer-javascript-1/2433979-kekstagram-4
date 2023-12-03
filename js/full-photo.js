@@ -1,10 +1,10 @@
-const fullPicture = document.querySelector('.big-picture');
-const commentList = fullPicture.querySelector('.social__comments');
-const cancelButton = fullPicture.querySelector('.big-picture__cancel');
+const fullPhoto = document.querySelector('.big-picture');
+const commentList = fullPhoto.querySelector('.social__comments');
+const cancelButton = fullPhoto.querySelector('.big-picture__cancel');
 const commentTemplate = document.querySelector('.social__comment');
 const bodyElement = document.querySelector('body');
-const commentsLoader = fullPicture.querySelector('.comments-loader');
-const countComments = fullPicture.querySelector('.social__comment-count');
+const commentsLoader = fullPhoto.querySelector('.comments-loader');
+const countComments = fullPhoto.querySelector('.social__comment-count');
 
 
 const createComment = ({avatar, name, message}) => {
@@ -29,8 +29,8 @@ const renderComments = (comments) => {
   commentList.append(fragment);
 };
 
-const hideFullPicture = () => {
-  fullPicture.classList.add('hidden');
+const hideFullPhoto = () => {
+  fullPhoto.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeyDown);
 };
@@ -41,32 +41,31 @@ const hideFullPicture = () => {
 function onDocumentKeyDown(evt) {
   if (evt.key === 'Escape'){
     evt.preventDafault();
-    hideFullPicture();
+    hideFullPhoto();
   }
 }
 
 const onCancelButtonClick = () => {
-  hideFullPicture();
+  hideFullPhoto();
 };
 
-const createFullPhoto = ({url, description, likes}) => {
-
-  fullPicture.querySelector('.big-picture__img').querySelector('img').src = url;
-  fullPicture.querySelector('.big-picture__img').querySelector('img').alt = description;
-  fullPicture.querySelector('.likes-count').textContent = likes;
-  fullPicture.querySelector('.social__caption').textContent = description;
+const getDetailsFullPhoto = ({url, description, likes}) => {
+  fullPhoto.querySelector('.big-picture__img').querySelector('img').src = url;
+  fullPhoto.querySelector('.big-picture__img').querySelector('img').alt = description;
+  fullPhoto.querySelector('.likes-count').textContent = likes;
+  fullPhoto.querySelector('.social__caption').textContent = description;
 };
 
-const showFullPicture = (data) => {
-  fullPicture.classList.remove('hidden');
+const showFullPhoto = (picture) => {
+  fullPhoto.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
   countComments.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeyDown);
 
-  createFullPhoto(data);
-  renderComments(data.comments);
+  getDetailsFullPhoto(picture);
+  renderComments(picture.comments);
   cancelButton.addEventListener('click', onCancelButtonClick);
 };
 
-export { showFullPicture };
+export { showFullPhoto };
