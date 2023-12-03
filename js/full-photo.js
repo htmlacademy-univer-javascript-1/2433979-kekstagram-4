@@ -5,6 +5,9 @@ const commentTemplate = document.querySelector('.social__comment');
 const bodyElement = document.querySelector('body');
 const commentsLoader = fullPhoto.querySelector('.comments-loader');
 const countComments = fullPhoto.querySelector('.social__comment-count');
+const commentsCounter = fullPhoto.querySelector('.comments-count');
+const loaderCommentsButton = fullPhoto.querySelector('.social__comments-loader');
+const STEP_COMMENTS = 5;
 
 
 const createComment = ({avatar, name, message}) => {
@@ -20,7 +23,6 @@ const createComment = ({avatar, name, message}) => {
 const renderComments = (comments) => {
   commentList.innerHTML = '';
   const fragment = document.createDocumentFragment();
-
   comments.forEach((item) => {
     const comment = createComment(item);
     commentList.append(comment);
@@ -28,6 +30,10 @@ const renderComments = (comments) => {
 
   commentList.append(fragment);
 };
+loaderCommentsButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
+});
 
 const hideFullPhoto = () => {
   fullPhoto.classList.add('hidden');
@@ -59,8 +65,6 @@ const getDetailsFullPhoto = ({url, description, likes}) => {
 const showFullPhoto = (picture) => {
   fullPhoto.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  commentsLoader.classList.add('hidden');
-  countComments.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeyDown);
 
   getDetailsFullPhoto(picture);
