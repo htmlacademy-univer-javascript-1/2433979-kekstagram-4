@@ -5,7 +5,6 @@ const commentTemplate = document.querySelector('.social__comment');
 const bodyElement = document.querySelector('body');
 const commentsLoader = fullPhoto.querySelector('.comments-loader');
 const countComments = fullPhoto.querySelector('.social__comment-count');
-const commentsCounter = fullPhoto.querySelector('.comments-count');
 const loaderCommentsButton = fullPhoto.querySelector('.social__comments-loader');
 const COMMENTS_STEP = 5;
 let allComments;
