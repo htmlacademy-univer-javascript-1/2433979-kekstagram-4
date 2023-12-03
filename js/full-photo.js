@@ -7,7 +7,9 @@ const commentsLoader = fullPhoto.querySelector('.comments-loader');
 const countComments = fullPhoto.querySelector('.social__comment-count');
 const commentsCounter = fullPhoto.querySelector('.comments-count');
 const loaderCommentsButton = fullPhoto.querySelector('.social__comments-loader');
-const STEP_COMMENTS = 5;
+const COMMENTS_STEP = 5;
+let allComments;
+let commentsShow = 0;
 
 
 const createComment = ({avatar, name, message}) => {
@@ -21,7 +23,6 @@ const createComment = ({avatar, name, message}) => {
 };
 
 const renderComments = (comments) => {
-  commentList.innerHTML = '';
   const fragment = document.createDocumentFragment();
   comments.forEach((item) => {
     const comment = createComment(item);
@@ -30,6 +31,19 @@ const renderComments = (comments) => {
 
   commentList.append(fragment);
 };
+
+function loadComments () {
+  const newPortion = allComments.slice(commentsShow, commentsShow + COMMENTS_STEP);
+  commentsShow += newPortion.length;
+  renderComments(newPortion);
+  if(commentsShow >= allComments.length){
+    loaderCommentsButton.classList.add('hidden');
+  } else{
+    loaderCommentsButton.classList.remove('hidden');
+  }
+  countComments.innerHTML = `${commentsShow} из <span class="comments-count">${allComments.length}</span> комментариев`;
+}
+
 loaderCommentsButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
@@ -63,12 +77,14 @@ const getDetailsFullPhoto = ({url, description, likes}) => {
 };
 
 const showFullPhoto = (picture) => {
+  commentList.innerHTML = '';
   fullPhoto.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeyDown);
 
   getDetailsFullPhoto(picture);
-  renderComments(picture.comments);
+  allComments = picture.comments;
+  loadComments();
   cancelButton.addEventListener('click', onCancelButtonClick);
 };
 
