@@ -88,6 +88,7 @@ const showFullPhoto = (picture) => {
   getDetailsFullPhoto(picture);
   allComments = picture.comments;
   loadComments();
+  commentsLoader.addEventListener('click', loadComments);
   cancelButton.addEventListener('click', onCancelButtonClick);
 };
 
