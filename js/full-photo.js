@@ -7,14 +7,6 @@ const commentsLoader = fullPicture.querySelector('.comments-loader');
 const countComments = fullPicture.querySelector('.social__comment-count');
 
 
-const createFullPhoto = ({url, description, likes}) => {
-
-  fullPicture.querySelector('.big-picture__img').querySelector('img').src = url;
-  fullPicture.querySelector('.big-picture__img').querySelector('img').alt = description;
-  fullPicture.querySelector('.likes-count').textContent = likes;
-  fullPicture.querySelector('.social__caption').textContent = description;
-};
-
 const createComment = ({avatar, name, message}) => {
   const comment = commentTemplate.cloneNode('true');
 
@@ -38,8 +30,8 @@ const renderComments = (comments) => {
 };
 
 const hideFullPicture = () => {
-  bodyElement.classList.remove('.modal-open');
-  fullPicture.classList.add('.hidden');
+  fullPicture.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeyDown);
 };
 
@@ -57,17 +49,24 @@ const onCancelButtonClick = () => {
   hideFullPicture();
 };
 
-cancelButton.addEventListener('click', onCancelButtonClick);
+const createFullPhoto = ({url, description, likes}) => {
+
+  fullPicture.querySelector('.big-picture__img').querySelector('img').src = url;
+  fullPicture.querySelector('.big-picture__img').querySelector('img').alt = description;
+  fullPicture.querySelector('.likes-count').textContent = likes;
+  fullPicture.querySelector('.social__caption').textContent = description;
+};
 
 const showFullPicture = (data) => {
-  bodyElement.classList.add('.modal-open');
-  fullPicture.classList.remove('.hidden');
-  document.addEventListener('keydown', onDocumentKeyDown);
+  fullPicture.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
   commentsLoader.classList.add('hidden');
   countComments.classList.add('hidden');
+  document.addEventListener('keydown', onDocumentKeyDown);
 
   createFullPhoto(data);
   renderComments(data.comments);
+  cancelButton.addEventListener('click', onCancelButtonClick);
 };
 
 export { showFullPicture };
