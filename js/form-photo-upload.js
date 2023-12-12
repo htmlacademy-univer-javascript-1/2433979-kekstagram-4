@@ -1,5 +1,3 @@
-import {isEscKey} from './util.js';
-
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const formToEditPhoto = uploadForm.querySelector('.img-upload__overlay');
@@ -26,7 +24,7 @@ const closeForm = () => {
 };
 
 function closeFormByEsc (evt) {
-  if (isEscKey(evt)) {
+  if (evt.key === 'Escape') {
     closeForm();
   }
 }
