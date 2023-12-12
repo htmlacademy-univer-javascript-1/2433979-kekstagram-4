@@ -1,7 +1,6 @@
 import {isEscKey} from './util.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
-//контрола загрузки файла
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const formToEditPhoto = uploadForm.querySelector('.img-upload__overlay');
 const closeFormButton = uploadForm.querySelector('.img-upload__cancel');
@@ -10,7 +9,7 @@ const commentInput = uploadForm.querySelector('.text__description');
 
 const MAX_COMMENT_LENGTH = 140;
 const MAX_COUNT_HASHTAGS = 5;
-const regularExpHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+const hashtagFormat = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const closeByEscape = (evt) => evt.stopPropagation();
 hashtagInput.addEventListener('keydown', closeByEscape);
@@ -50,7 +49,7 @@ const pristine = new Pristine(uploadForm, {
 
 const validHashtag = (value) => {
   const hashtagsArray = value.toLowerCase().trim().split(/\s+/);
-  return !(hashtagsArray.find((item) => !regularExpHashtag.test(item))) &&
+  return !(hashtagsArray.find((item) => !hashtagFormat.test(item))) &&
         !(hashtagsArray.length > MAX_COUNT_HASHTAGS) &&
         (new Set(hashtagsArray).size === hashtagsArray.length);
 };
@@ -60,7 +59,7 @@ const getMessageOfHashtagError = () => {
   if (hashtagsArray.length > MAX_COUNT_HASHTAGS) {
     return 'Превышено количество хэш-тегов';
   }
-  if (hashtagsArray.find((item) => !regularExpHashtag.test(item))) {
+  if (hashtagsArray.find((item) => !hashtagFormat.test(item))) {
     return 'Введён невалидный хэш-тег';
   }
   if (new Set(hashtagsArray).size !== hashtagsArray.length) {
