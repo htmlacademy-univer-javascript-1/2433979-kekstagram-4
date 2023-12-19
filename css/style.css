@@ -1395,3 +1395,12 @@ main {
 .hidden {
   display: none;
 }
+
+.img-upload__field-wrapper--error {
+  color: rgb(185, 30, 30);
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: -20px;
+  z-index: 10000;
+  position: relative;
+}
