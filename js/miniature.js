@@ -1,49 +1,30 @@
-const successMesagge = document
-  .querySelector('#success')
-  .content.querySelector('.success');
+import { showFullPhoto } from './full-photo.js';
+const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const picturesContainer = document.querySelector('.pictures');
 
-const errorMessage = document
-  .querySelector('#error')
-  .content.querySelector('.error');
+const createThumbnail = ({url, description, likes, comments}) => {
+  const thumbnail = thumbnailTemplate.cloneNode('true');
 
-const body = document.querySelector('body');
+  thumbnail.querySelector('.picture__img').src = url;
+  thumbnail.querySelector('.picture__img').alt = description;
+  thumbnail.querySelector('.picture__likes').textContent = likes;
+  thumbnail.querySelector('.picture__comments').textContent = comments.length;
 
-function hideAnyMessage() {
-  const message = document.querySelector('.success') || document.querySelector('.error');
-  message.remove();
-  document.removeEventListener('keydown', onEscape);
-  body.removeEventListener('click', onBody);
-}
-
-function onBody(evt) {
-  if (evt.target.closest('.successinner') || evt.target.closest('.errorinner')){
-    return;
-  }
-  hideAnyMessage();
-}
-
-function onEscape(evt) {
-  if (evt.key === 'Escape') {
-    evt.preventDefault();
-    hideAnyMessage();
-  }
-}
-
-const showMessage = (messageElement, closeButtonClass) => {
-  body.append(messageElement);
-  document.addEventListener('keydown', onEscape);
-  body.addEventListener('click', onBody);
-  messageElement
-    .querySelector(closeButtonClass)
-    .addEventListener('click', hideAnyMessage);
+  return thumbnail;
 };
 
-const showSuccess = () => {
-  showMessage(successMesagge, '.success__button');
+const renderThumbnails = (pictures) => {
+  const fragment = document.createDocumentFragment();
+  pictures.forEach((picture) => {
+    const thumbnail = createThumbnail(picture);
+    thumbnail.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      showFullPhoto(picture);
+    });
+    fragment.append(thumbnail);
+  });
+
+  picturesContainer.append(fragment);
 };
 
-const showError = () => {
-  showMessage(errorMessage, '.error__button');
-};
-
-export {showSuccess, showError};
+export { renderThumbnails };
