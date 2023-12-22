@@ -1,3 +1,5 @@
+import { resetScale } from './scaling.js';
+import { resetEffect, init } from './effects.js';
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const pictureInput = uploadForm.querySelector('input[name="filename"]');
@@ -5,7 +7,7 @@ const imageOverlay = uploadForm.querySelector('.img-upload__overlay');
 const cancelButton = uploadForm.querySelector('.img-upload__cancel');
 const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const commentField = uploadForm.querySelector('.text__description');
-const scale = uploadForm.querySelector('input[name="scale"]');
+//const scale = uploadForm.querySelector('input[name="scale"]');
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -36,6 +38,8 @@ const hideForm = () => {
 
   pristine.reset();
   pictureInput.value = '';
+  resetScale();
+  resetEffect();
 };
 
 function onFormKeydown (evt) {
@@ -50,6 +54,7 @@ const showForm = () => {
 
   cancelButton.addEventListener('click', hideForm);
   document.addEventListener('keydown', onFormKeydown);
+  init();
 };
 
 uploadInput.addEventListener('change', showForm);
@@ -87,6 +92,6 @@ uploadForm.addEventListener('submit', (evt) => {
     pictureInput.value = '';
     commentField.value = '';
     hashtagsField.value = '';
-    scale.value = '100%';
+    //scale.value = '100%';
   }
 });
