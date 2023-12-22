@@ -91,4 +91,4 @@ const showFullPhoto = (picture) => {
   cancelButton.addEventListener('click', onCancelButtonClick);
 };
 
-export { showFullPhoto };
+export { showFullPhoto, hideFullPhoto };
