@@ -80,7 +80,7 @@ const setImageStyle = () => {
 
   const { value } = effectLevel;
   const { style, unit } = Filters[activeEffect];
-  image.style.filter = `${style}`(`${value}${unit}`);
+  image.style.filter = `${style}(${value}${unit})`;
 };
 
 const onSliderUpdate = () => {
