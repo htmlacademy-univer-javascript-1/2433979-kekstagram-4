@@ -7,11 +7,19 @@ const imageOverlay = uploadForm.querySelector('.img-upload__overlay');
 const cancelButton = uploadForm.querySelector('.img-upload__cancel');
 const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const commentField = uploadForm.querySelector('.text__description');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
+const counter = uploadForm.querySelector('.counter-text__current');
 //const scale = uploadForm.querySelector('input[name="scale"]');
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
 const hashtagFormat = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикация...'
+};
+
 function isTextFieldsFocused(){
   return document.activeElement === hashtagsField ||
     document.activeElement === commentField;
@@ -19,6 +27,13 @@ function isTextFieldsFocused(){
 const closeByEscape = (evt) => evt.stopPropagation();
 hashtagsField.addEventListener('keydown', closeByEscape);
 commentField.addEventListener('keydown', closeByEscape);
+
+function onInput(evt) {
+  const length = evt.target.value.length;
+  counter.textContent = length;
+}
+
+commentField.addEventListener('input', onInput);
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -85,13 +100,38 @@ const isValidComment = (value) => value.length < MAX_LENGTH_COMMENT;
 
 pristine.addValidator(commentField, isValidComment, `Длина комментария больше ${MAX_LENGTH_COMMENT} символов`);
 
-uploadForm.addEventListener('submit', (evt) => {
+/*uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if(pristine.validate()){
     hideForm();
     pictureInput.value = '';
     commentField.value = '';
     hashtagsField.value = '';
-    //scale.value = '100%';
+    ///scale.value = '100%';
   }
-});
+});*/
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const setOnSubmit = (callback) => {
+  uploadForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+
+    if(pristine.validate()){
+      blockSubmitButton();
+      await callback(new FormData(uploadForm));
+      unblockSubmitButton();
+    }
+  });
+};
+
+export {hideForm, setOnSubmit};
+
