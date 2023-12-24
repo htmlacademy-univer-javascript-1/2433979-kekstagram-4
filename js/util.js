@@ -28,6 +28,7 @@ const getRndIntWithoutRepeat = (min, max) => {
     return currentValue;
   };
 };
+
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -38,6 +39,7 @@ document.addEventListener('keydown', (evt) => {
     }
   }
 });
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
@@ -64,6 +66,5 @@ const showAlert = (message) => {
 const getRandomArrayElement = (elements) => (
   (elements[getRandomInteger(0, elements.length - 1)])
 );
-export {getRandomInteger, getRndIntWithoutRepeat, getRandomArrayElement, showAlert};
 
-//export {getRandomInteger, getRndIntWithoutRepeat, getRandomArrayElement};
+export {getRandomInteger, getRndIntWithoutRepeat, getRandomArrayElement, showAlert};

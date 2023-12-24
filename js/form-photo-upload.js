@@ -1,5 +1,6 @@
 import { resetScale } from './scaling.js';
 import { resetEffect, init } from './effects.js';
+
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const pictureInput = uploadForm.querySelector('input[name="filename"]');
@@ -9,7 +10,6 @@ const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const commentField = uploadForm.querySelector('.text__description');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const counter = uploadForm.querySelector('.counter-text__current');
-//const scale = uploadForm.querySelector('input[name="scale"]');
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -99,17 +99,6 @@ pristine.addValidator(hashtagsField, isValidHashtag, getMessageHashtagError);
 const isValidComment = (value) => value.length < MAX_LENGTH_COMMENT;
 
 pristine.addValidator(commentField, isValidComment, `Длина комментария больше ${MAX_LENGTH_COMMENT} символов`);
-
-/*uploadForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  if(pristine.validate()){
-    hideForm();
-    pictureInput.value = '';
-    commentField.value = '';
-    hashtagsField.value = '';
-    ///scale.value = '100%';
-  }
-});*/
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
