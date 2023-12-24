@@ -1,6 +1,5 @@
 import { resetScale } from './scaling.js';
 import { resetEffect, init } from './effects.js';
-
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const pictureInput = uploadForm.querySelector('input[name="filename"]');
