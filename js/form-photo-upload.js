@@ -1,5 +1,6 @@
 import { resetScale } from './scaling.js';
 import { resetEffect, init } from './effects.js';
+import { FILE_TYPES } from './util.js';
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const pictureInput = uploadForm.querySelector('input[name="filename"]');
@@ -9,6 +10,7 @@ const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const commentField = uploadForm.querySelector('.text__description');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 const counter = uploadForm.querySelector('.counter-text__current');
+const imagePreview = document.querySelector('.img-upload__preview img');
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -62,6 +64,16 @@ function onFormKeydown (evt) {
   }
 }
 
+const changePreview = () => {
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    imagePreview.src = URL.createObjectURL(file);
+  }
+};
+
 const showForm = () => {
   imageOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -69,6 +81,7 @@ const showForm = () => {
   cancelButton.addEventListener('click', hideForm);
   document.addEventListener('keydown', onFormKeydown);
   init();
+  changePreview();
 };
 
 uploadInput.addEventListener('change', showForm);
