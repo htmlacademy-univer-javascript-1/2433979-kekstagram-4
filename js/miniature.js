@@ -27,4 +27,8 @@ const renderThumbnails = (pictures) => {
   picturesContainer.append(fragment);
 };
 
-export { renderThumbnails };
+const removeThumbnails = () => {
+  document.querySelectorAll('.picture').forEach((picture) => picture.remove());
+};
+
+export { renderThumbnails, removeThumbnails };
