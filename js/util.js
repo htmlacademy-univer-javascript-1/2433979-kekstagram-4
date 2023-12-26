@@ -2,8 +2,9 @@ import { hideFullPhoto } from './full-photo.js';
 import { hideForm} from './form-photo-upload.js';
 
 const ALERT_SHOW_TIME = 5000;
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-//функция для получения случайного числа из диапазона
+/*//функция для получения случайного числа из диапазона
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -28,6 +29,10 @@ const getRndIntWithoutRepeat = (min, max) => {
     return currentValue;
   };
 };
+//функция для получения случайного элемента массива
+const getRandomArrayElement = (elements) => (
+  (elements[getRandomInteger(0, elements.length - 1)])
+);*/
 
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
@@ -62,11 +67,6 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-//функция для получения случайного элемента массива
-const getRandomArrayElement = (elements) => (
-  (elements[getRandomInteger(0, elements.length - 1)])
-);
-
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
@@ -77,4 +77,5 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-export {getRandomInteger, getRndIntWithoutRepeat, getRandomArrayElement, showAlert, debounce};
+export { showAlert, debounce, FILE_TYPES};
+

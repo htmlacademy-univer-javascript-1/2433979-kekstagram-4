@@ -6,7 +6,6 @@ const sections = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
 let currentFilter = document.querySelector('.img-filters__button--active');
-
 const sectionsFuncs = {
   'filter-default': () => {
     removeThumbnails();
@@ -15,12 +14,12 @@ const sectionsFuncs = {
 
   'filter-random': () => {
     removeThumbnails();
-    renderThumbnails(pictures.slice().sort(() => Math.random() - 0.5).slice(0, 10));
+    renderThumbnails(pictures.toSorted(() => Math.random() - 0.5).slice(0, 10));
   },
 
   'filter-discussed': () => {
     removeThumbnails();
-    renderThumbnails(pictures.slice().sort((first, second) => second.comments.length - first.comments.length));
+    renderThumbnails(pictures.toSorted((first, second) => second.comments.length - first.comments.length));
   }
 };
 
@@ -40,3 +39,4 @@ const showSections = () => {
 };
 
 export { showSections };
+
