@@ -1,4 +1,4 @@
-import { renderThumbnails, removeThumbnails } from './miniature.js';
+import { renderThumbnails } from './miniature.js';
 import { debounce } from './util.js';
 import { pictures } from './main.js';
 
@@ -9,17 +9,17 @@ let currentFilter = document.querySelector('.img-filters__button--active');
 
 const sectionsFuncs = {
   'filter-default': () => {
-    removeThumbnails();
+    //removeThumbnails();
     renderThumbnails(pictures);
   },
 
   'filter-random': () => {
-    removeThumbnails();
+    //removeThumbnails();
     renderThumbnails(pictures.slice().sort(() => Math.random() - 0.5).slice(0, 10));
   },
 
   'filter-discussed': () => {
-    removeThumbnails();
+    //removeThumbnails();
     renderThumbnails(pictures.slice().sort((first, second) => second.comments.length - first.comments.length));
   }
 };
