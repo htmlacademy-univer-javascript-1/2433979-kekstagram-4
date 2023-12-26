@@ -64,6 +64,16 @@ function onFormKeydown (evt) {
   }
 }
 
+const changePreview = () => {
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    imagePreview.src = URL.createObjectURL(file);
+  }
+};
+
 const showForm = () => {
   imageOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -71,21 +81,10 @@ const showForm = () => {
   cancelButton.addEventListener('click', hideForm);
   document.addEventListener('keydown', onFormKeydown);
   init();
+  changePreview();
 };
 
-const onChooseFileBtnClick = () => {
-  showForm();
-  const file = uploadInput.files[0];
-  const isCorrectFileType = FILE_TYPES.some((item) => file.name.toLowerCase().endsWith(item));
-  if (isCorrectFileType) {
-    imagePreview.src = URL.createObjectURL(file);
-  }
-  uploadForm.querySelectorAll('.effects__preview').forEach((item) => {
-    item.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
-  });
-};
-
-uploadInput.addEventListener('change', onChooseFileBtnClick);
+uploadInput.addEventListener('change', showForm);
 
 const isValidHashtag = (value) => {
   const hashtagsArray = value.toLowerCase().trim().split(/\s+/);
