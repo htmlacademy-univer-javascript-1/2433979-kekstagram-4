@@ -1,6 +1,4 @@
-//import {similarObjects} from './data.js';
 import {renderThumbnails} from './miniature.js';
-//import './form-photo-upload.js';
 import { hideForm, setOnSubmit } from './form-photo-upload.js';
 import { showSuccess, showError } from './message.js';
 import { getData, sendData } from './api.js';
