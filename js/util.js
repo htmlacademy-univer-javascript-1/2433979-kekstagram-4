@@ -3,6 +3,32 @@ import { hideForm} from './form-photo-upload.js';
 
 const ALERT_SHOW_TIME = 5000;
 
+//функция для получения случайного числа из диапазона
+const getRandomInteger = (min, max) => {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+};
+
+//функция для получения случайного числа из диапазона без повторений
+const getRndIntWithoutRepeat = (min, max) => {
+  const previousValues = [];
+
+  return function() {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= max - min + 1){
+      return null;
+    }
+    while(previousValues.includes(currentValue)){
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+};
+
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -36,6 +62,11 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
+//функция для получения случайного элемента массива
+const getRandomArrayElement = (elements) => (
+  (elements[getRandomInteger(0, elements.length - 1)])
+);
+
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
@@ -46,5 +77,4 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-//export {getRandomInteger, getRndIntWithoutRepeat, getRandomArrayElement, showAlert, debounce};
-export {showAlert, debounce, ALERT_SHOW_TIME};
+export {getRandomInteger, getRndIntWithoutRepeat, getRandomArrayElement, showAlert, debounce};
