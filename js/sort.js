@@ -1,26 +1,26 @@
-import { renderThumbnails } from './miniature.js';
+import { renderThumbnails, removeThumbnails } from './miniature.js';
 import { debounce } from './util.js';
 import { pictures } from './main.js';
-const FILTER_PICTURES_COUNT = 10;
+
 const sections = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__button');
 
 let currentFilter = document.querySelector('.img-filters__button--active');
 
-const sortRandomly = () => Math.random() - 0.5;
-const sortByComments = (firstPicture, secondPicture) => secondPicture.comments.length - firstPicture.comments.length;
-
 const sectionsFuncs = {
   'filter-default': () => {
+    removeThumbnails();
     renderThumbnails(pictures);
   },
 
   'filter-random': () => {
-    renderThumbnails(pictures.slice(0, FILTER_PICTURES_COUNT).sort(sortRandomly));
+    removeThumbnails();
+    renderThumbnails(pictures.slice().sort(() => Math.random() - 0.5).slice(0, 10));
   },
 
   'filter-discussed': () => {
-    renderThumbnails(pictures.slice().sort(sortByComments));
+    removeThumbnails();
+    renderThumbnails(pictures.slice().sort((first, second) => second.comments.length - first.comments.length));
   }
 };
 
