@@ -13,14 +13,8 @@ const createThumbnail = ({url, description, likes, comments}) => {
   return thumbnail;
 };
 
-const removeThumbnails = () => {
-  document.querySelectorAll('.picture').forEach((picture) => picture.remove());
-};
-
 const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
-  removeThumbnails();
-
   pictures.forEach((picture) => {
     const thumbnail = createThumbnail(picture);
     thumbnail.addEventListener('click', (evt) => {
@@ -31,6 +25,10 @@ const renderThumbnails = (pictures) => {
   });
 
   picturesContainer.append(fragment);
+};
+
+const removeThumbnails = () => {
+  document.querySelectorAll('.picture').forEach((picture) => picture.remove());
 };
 
 export { renderThumbnails, removeThumbnails };

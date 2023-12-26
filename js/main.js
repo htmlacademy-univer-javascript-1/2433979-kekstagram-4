@@ -17,13 +17,6 @@ setOnSubmit(async (data) => {
   }
 });
 
-try{
-  getData()
-    .then((data) => renderThumbnails(data));
-} catch(err){
-  showAlert(err.message);
-}
-
 let pictures = [];
 
 const addPictures = (newPictures) => {
@@ -31,7 +24,9 @@ const addPictures = (newPictures) => {
   renderThumbnails(pictures);
 };
 
-getData(addPictures, showError);
+getData()
+  .then((newPictures) => addPictures(newPictures))
+  .catch((err) => showAlert(err.message));
 showSections();
 
 export {pictures};

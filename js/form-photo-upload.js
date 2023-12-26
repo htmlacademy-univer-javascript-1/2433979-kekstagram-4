@@ -81,8 +81,8 @@ const showForm = () => {
 
   cancelButton.addEventListener('click', hideForm);
   document.addEventListener('keydown', onFormKeydown);
-  changePreview();
   init();
+  changePreview();
 };
 
 uploadInput.addEventListener('change', showForm);
