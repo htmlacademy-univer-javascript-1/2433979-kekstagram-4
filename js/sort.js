@@ -1,5 +1,5 @@
 import { renderThumbnails, removeThumbnails } from './miniature.js';
-import { debounce } from './util.js';
+import { debounce, TIMEOUT_DELAY } from './util.js';
 import { pictures } from './main.js';
 
 const sections = document.querySelector('.img-filters');
@@ -28,7 +28,7 @@ const onFilterUpdate = debounce((event) => {
   currentFilter.classList.remove('img-filters__button--active');
   currentFilter = event.target;
   currentFilter.classList.add('img-filters__button--active');
-});
+}, TIMEOUT_DELAY);
 
 const showSections = () => {
   sections.classList.remove('img-filters--inactive');
