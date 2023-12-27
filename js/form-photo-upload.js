@@ -46,6 +46,7 @@ const hideForm = () => {
   cancelButton.removeEventListener('click', hideForm);
   document.removeEventListener('keydown', onFormKeydown);
 
+  uploadForm.reset();
   pristine.reset();
   pictureInput.value = '';
   resetScale();

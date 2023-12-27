@@ -32,7 +32,7 @@ const renderComments = (comments) => {
   commentList.append(fragment);
 };
 
-function loadComments () {
+const loadComments = () => {
   const newPortion = allComments.slice(commentsShow, commentsShow + COMMENTS_STEP);
   commentsShow += newPortion.length;
   renderComments(newPortion);
@@ -42,7 +42,7 @@ function loadComments () {
     loaderCommentsButton.classList.remove('hidden');
   }
   countComments.innerHTML = `${commentsShow} из <span class="comments-count">${allComments.length}</span> комментариев`;
-}
+};
 
 loaderCommentsButton.addEventListener('click', (evt) => {
   evt.preventDefault();
