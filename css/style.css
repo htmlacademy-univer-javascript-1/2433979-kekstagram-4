@@ -1398,7 +1398,7 @@ main {
 
 .img-upload__field-wrapper--error {
   color: rgb(185, 30, 30);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 800;
   margin-top: -20px;
   z-index: 10000;

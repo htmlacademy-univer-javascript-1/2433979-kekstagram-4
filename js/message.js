@@ -1,3 +1,5 @@
+const body = document.querySelector('body');
+
 const successMesagge = document
   .querySelector('#success')
   .content.querySelector('.success');
@@ -5,8 +7,6 @@ const successMesagge = document
 const errorMessage = document
   .querySelector('#error')
   .content.querySelector('.error');
-
-const body = document.querySelector('body');
 
 function hideAnyMessage() {
   const message = document.querySelector('.success') || document.querySelector('.error');

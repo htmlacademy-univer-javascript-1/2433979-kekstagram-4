@@ -1,3 +1,5 @@
+const COMMENTS_STEP = 5;
+
 const fullPhoto = document.querySelector('.big-picture');
 const commentList = fullPhoto.querySelector('.social__comments');
 const cancelButton = fullPhoto.querySelector('.big-picture__cancel');
@@ -6,10 +8,9 @@ const bodyElement = document.querySelector('body');
 const commentsLoader = fullPhoto.querySelector('.comments-loader');
 const countComments = fullPhoto.querySelector('.social__comment-count');
 const loaderCommentsButton = fullPhoto.querySelector('.social__comments-loader');
-const COMMENTS_STEP = 5;
+
 let allComments;
 let commentsShow = 0;
-
 
 const createComment = ({avatar, name, message}) => {
   const comment = commentTemplate.cloneNode('true');

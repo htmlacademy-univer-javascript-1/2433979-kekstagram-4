@@ -2,17 +2,6 @@ import { resetScale } from './scaling.js';
 import { resetEffect, init } from './effects.js';
 import { FILE_TYPES } from './util.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
-const uploadInput = uploadForm.querySelector('.img-upload__input');
-const pictureInput = uploadForm.querySelector('input[name="filename"]');
-const imageOverlay = uploadForm.querySelector('.img-upload__overlay');
-const cancelButton = uploadForm.querySelector('.img-upload__cancel');
-const hashtagsField = uploadForm.querySelector('.text__hashtags');
-const commentField = uploadForm.querySelector('.text__description');
-const submitButton = uploadForm.querySelector('.img-upload__submit');
-const counter = uploadForm.querySelector('.counter-text__current');
-const imagePreview = document.querySelector('.img-upload__preview img');
-
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
 const hashtagFormat = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -22,20 +11,24 @@ const SubmitButtonText = {
   SENDING: 'Публикация...'
 };
 
+const uploadForm = document.querySelector('.img-upload__form');
+const uploadInput = uploadForm.querySelector('.img-upload__input');
+const pictureInput = uploadForm.querySelector('input[name="filename"]');
+const imageOverlay = uploadForm.querySelector('.img-upload__overlay');
+const cancelButton = uploadForm.querySelector('.img-upload__cancel');
+const hashtagsField = uploadForm.querySelector('.text__hashtags');
+const commentField = uploadForm.querySelector('.text__description');
+const submitButton = uploadForm.querySelector('.img-upload__submit');
+const imagePreview = document.querySelector('.img-upload__preview img');
+
 function isTextFieldsFocused(){
   return document.activeElement === hashtagsField ||
     document.activeElement === commentField;
 }
+
 const closeByEscape = (evt) => evt.stopPropagation();
 hashtagsField.addEventListener('keydown', closeByEscape);
 commentField.addEventListener('keydown', closeByEscape);
-
-function onInput(evt) {
-  const length = evt.target.value.length;
-  counter.textContent = length;
-}
-
-commentField.addEventListener('input', onInput);
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',

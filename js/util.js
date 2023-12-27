@@ -2,6 +2,7 @@ import { hideFullPhoto } from './full-photo.js';
 import { hideForm} from './form-photo-upload.js';
 
 const ALERT_SHOW_TIME = 5000;
+const TIMEOUT_DELAY = 500;
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 document.addEventListener('keydown', (evt) => {
@@ -37,7 +38,7 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const debounce = (callback, timeoutDelay = 500) => {
+const debounce = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {
@@ -47,5 +48,5 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-export { showAlert, debounce, FILE_TYPES};
+export { showAlert, debounce, FILE_TYPES, TIMEOUT_DELAY};
 
